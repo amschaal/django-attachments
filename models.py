@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.generic import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
+#
 # Attach a file to just about anything:
 # file = File(text='My wonderful note',created_by=request.user,content_object=some_model_instance)
 # file.save()
