@@ -15,7 +15,7 @@ from rest_framework import routers
 from api import NoteViewSet
 
 router = routers.DefaultRouter()
-router.register(r'notes', NoteViewSet)
+router.register(r'notes', NoteViewSet,'Note')
 
 
 urlpatterns = patterns('',
