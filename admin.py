@@ -1,5 +1,5 @@
 from models import File
-from  django.contrib.contenttypes.generic import GenericStackedInline
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 
 class FileInlineAdmin(GenericStackedInline):
