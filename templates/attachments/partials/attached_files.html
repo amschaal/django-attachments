@@ -16,4 +16,4 @@
 <h4>There are no attached files.</h4>
 {% endif %}
 {% endwith%}
-<a class="btn btn-success" href="{% url 'attach_file' model=model pk=pk %}">Add file</a>
+<a class="btn btn-success" href="{% url 'attach_file' content_type_id=object|content_type_id pk=object.pk %}">Add file</a>

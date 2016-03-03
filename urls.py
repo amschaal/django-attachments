@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^file/(?P<pk>\d+)/get/$', 'attachments.views.get_file', name='get_file'),
-    url(r'^files/(?P<model>\w+)/(?P<pk>[\-\w]+)/attach/$', 'attachments.views.attach_file', name='attach_file'),
+    url(r'^files/(?P<content_type_id>\d+)/(?P<pk>[\-\w]+)/attach/$', 'attachments.views.attach_file', name='attach_file'),
     url(r'^api/', include(router.urls)),
 )
 

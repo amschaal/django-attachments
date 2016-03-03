@@ -1,5 +1,5 @@
 
-angular.module('Dashboard')
+angular.module('attachments')
 .controller('NotesController', ['$scope','Note', NotesController]);
 
 function NotesController($scope,$Note) {

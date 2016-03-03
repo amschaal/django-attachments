@@ -7,8 +7,8 @@ from forms import FileForm
 def get_file(request,pk):
     file = File.objects.get(id=pk)
     return sendfile(request, file.file.path)
-def attach_file(request,model,pk):
-    ct = ContentType.objects.get(model=model)
+def attach_file(request,content_type_id,pk):
+    ct = ContentType.objects.get(id=content_type_id)
     klass = ct.model_class()
     obj = klass.objects.get(pk=pk)
     next = request.REQUEST.get('next',request.META['HTTP_REFERER'])

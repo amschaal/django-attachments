@@ -9,7 +9,7 @@ var transformDjangoRestResponse = function(data, headers){
     return {};
 }
 
-angular.module('glimsModels')
+angular.module('attachments',['ngResource'])
 .factory('Note', ['$resource', function ($resource) {
   return $resource('/attachments/api/notes/:id/', {id:'@id'}, {
     query: { method: 'GET', transformResponse:transformDjangoRestResponse, isArray:true },
