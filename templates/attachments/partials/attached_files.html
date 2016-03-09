@@ -1,19 +1,42 @@
 {% load attachment_helpers %}
+<!-- <script src="/static/attachments/js/vendor/ng-file-upload/ng-file-upload-all.min.js"></script> -->
+<style>
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
+</style>
+<script src="/static/attachments/js/vendor/ng-file-upload/ng-file-upload-shim.min.js"></script>
+<script src="/static/attachments/js/vendor/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="/static/attachments/js/pages/files.js"></script>
+
 <h3>Files</h3>
-{% with files=object|object_files%}
-{% if files|length > 0%}
-<table class="table">
- 	<thead>
-   	<tr><th>Name</th><th>Description</th></tr>
-   </thead>
-   <tbody>
-   {% for f in files %}
-   	<tr><td><a href="{% url 'get_file' pk=f.id %}">{{f.name}}</a></td><td>{{f.description}}</td></tr>
-   {% endfor %}
-   </tbody>
- </table>
-{% else %}
-<h4>There are no attached files.</h4>
-{% endif %}
-{% endwith%}
-<a class="btn btn-success" href="{% url 'attach_file' content_type_id=object|content_type_id pk=object.pk %}">Add file</a>
+<div ng-controller="FilesController" ng-init="configURL({content_type_id:{{object|content_type_id}},pk:'{{object.pk}}'});init({content_type_id:{{object|content_type_id}},pk:'{{object.pk}}'});">
+
+<div ngf-drop="uploadFiles($files)" class="drop-box" ng-model="file_uploads"
+  ngf-drag-over-class="'dragover'" ngf-multiple="true">Drop files here</div>
+<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+
+  
+<table class="table" ng-if="files.length">
+<tr><th>File</th><th>Description</th></tr>
+<tr ng-repeat="file in files">
+<td><a href="{[file.file]}">{[file.name]}</a></td>
+<td ng-if="!file.editing">{[file.description]}</td><td ng-if="file.editing"><textarea ng-model="file.description"></textarea></td>
+<td>
+	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteFile(file,$index)">Delete</button>
+	<button class="btn btn-xs pull-right" ng-if="!file.editing" ng-click="editFile(file)">Edit</button>
+	<button class="btn btn-xs btn-success pull-right" ng-if="file.editing" ng-click="saveFile(file)">Save</button>
+</td>
+</tr>
+</table>
+</div>

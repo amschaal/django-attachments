@@ -1,8 +1,8 @@
 
 angular.module('attachments')
-.controller('NotesController', ['$scope','Note', NotesController]);
+.controller('NotesController', ['$scope','$rootScope','Note', NotesController]);
 
-function NotesController($scope,$Note) {
+function NotesController($scope,$rootScope,$Note) {
 	var noteHash={}, noteDefaults={};
 	$scope.getResponses = function(note){
 		if(note)
@@ -10,11 +10,19 @@ function NotesController($scope,$Note) {
 		else
 			return noteHash[null];
 	};
-	
+	function setNotesCount(){
+		var count = 0;
+		console.log('setNotesCount')
+		angular.forEach(noteHash,function(notes,key){
+			console.log('counting',notes,key);
+			count += notes.length;
+		});
+		if ($scope.notes)
+			$rootScope.attachments_object.notes = count;
+	}
 //	$scope.notes = $Note.query();
 	$scope.setNoteDefaults = function(defaults){
 		noteDefaults = defaults;
-		
 	};
 	$scope.save = function(note){
 		if(note.id)
@@ -38,6 +46,7 @@ function NotesController($scope,$Note) {
 				if (noteHash[parent][i].id == id)
 					noteHash[parent].splice(i,1);
 			}
+			setNotesCount();
 		};
 		if(!id){
 			removeFunc();
@@ -56,13 +65,14 @@ function NotesController($scope,$Note) {
 		if(!noteHash[note.parent])
 			noteHash[note.parent] = [];
 		noteHash[note.parent].push(note);
+		setNotesCount();
 	};
 	$scope.init = function(){
 		$scope.notes = $Note.query(noteDefaults,function() {
 			angular.forEach($scope.notes,function(note){
 				$scope.addNote(note);
 			});
-
+			setNotesCount();
 			console.log(noteHash);
 		});
 	}

@@ -1,4 +1,5 @@
 {% load content_type %}
+<script src="/static/attachments/js/pages/notes.js"></script>
 <style>
 .pink{background-color:pink;}
 .green{background-color:green;}
@@ -6,7 +7,7 @@
 .note {max-width: 800px; min-height: 50px;}
 .note textarea{width:100%;height:100%; min-height:100px;}
 .note span.note-content{min-height:30px;width:100%;}
-.note .details{text-size}
+.note .content{white-space: pre;}
 </style>
 
 <script type='text/ng-template' id="noteResponses.html">
@@ -19,8 +20,8 @@
 				<div style="clear:both"></div>
 			</div>
 			<div ng-if="!note.editing">
-				<p><small class="details">{[note.created]}</small></p>
-				{[note.content]}
+				<p><small class="details">{[note.created|date:'short']}</small></p>
+				<div class="content">{[note.content]}</div>
 				<i style="margin-left:5px" class="glyphicon glyphicon-share-alt pull-right" ng-click="respond(note)" ng-if="note.id"></i> 
 				<i style="margin-left:5px" class="glyphicon glyphicon-pencil pull-right" ng-click="note.editing=true"></i> 
 				<i class="glyphicon glyphicon-remove pull-right" ng-click="deleteNote(note)"></i>

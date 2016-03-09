@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 
 #
 # Attach a file to just about anything:
@@ -32,3 +34,9 @@ class Note(models.Model):
     admin_only = models.BooleanField(default=True)
     def __unicode__(self):              # __unicode__ on Python 2
         return self.content[:50]+'...'
+
+
+@receiver(pre_delete, sender=File)
+def file_delete(sender, instance, **kwargs):
+    # Pass false so FileField doesn't save the model.
+    instance.file.delete(False)

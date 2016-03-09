@@ -4,7 +4,7 @@ from models import File
 class FileForm(ModelForm):
     class Meta:
         model = File
-        fields = ['file','name','description']
+        fields = ['file','description']
 
 class UpdateFileForm(ModelForm):
     class Meta:
