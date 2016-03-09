@@ -26,12 +26,13 @@
 <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
 
 
-  
+  <h4 ng-if="!files.length">There are currently no files.</h4>
 <table class="table" ng-if="files.length">
-<tr><th>File</th><th>Description</th></tr>
+<tr><th>File</th><th>Description</th><th>Size</th></tr>
 <tr ng-repeat="file in files">
 <td><a href="{[file.file]}">{[file.name]}</a></td>
 <td ng-if="!file.editing">{[file.description]}</td><td ng-if="file.editing"><textarea ng-model="file.description"></textarea></td>
+<td>{[file.size]}</td>
 <td>
 	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteFile(file,$index)">Delete</button>
 	<button class="btn btn-xs pull-right" ng-if="!file.editing" ng-click="editFile(file)">Edit</button>

@@ -20,7 +20,7 @@
 				<div style="clear:both"></div>
 			</div>
 			<div ng-if="!note.editing">
-				<p><small class="details">{[note.created|date:'short']}</small></p>
+				<p><small class="details">{[note.created_by]} {[note.created|date:'short']}</small></p>
 				<div class="content">{[note.content]}</div>
 				<i style="margin-left:5px" class="glyphicon glyphicon-share-alt pull-right" ng-click="respond(note)" ng-if="note.id"></i> 
 				<i style="margin-left:5px" class="glyphicon glyphicon-pencil pull-right" ng-click="note.editing=true"></i> 
@@ -31,7 +31,7 @@
 	</div>
 </script> 
 <div ng-controller="NotesController" ng-init="setNoteDefaults({content_type:{{object|content_type_id}},object_id:'{{object.pk}}'});init();">
-	<h3>Notes</h3>
+	<h4 ng-if="notes.length < 1">There are currently no notes.</h4>
 	<ng-include src="'noteResponses.html'"></ng-include>
 	<button ng-click="newNote()" class="btn btn-success">Add note</button>
 </div>
