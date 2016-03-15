@@ -13,6 +13,7 @@ class File(models.Model):
     file = models.FileField(upload_to='files')
     name = models.CharField(max_length=100)
     description = models.TextField(null=True,blank=True)
+    uploaded = models.DateTimeField(auto_now_add=True)
     uploaded_by = models.ForeignKey(User,null=True,blank=True)
     content_type = models.ForeignKey(ContentType)
     object_id = models.CharField(max_length=30) #Can be coerced into integer key if necessary
@@ -25,7 +26,7 @@ class Note(models.Model):
     parent = models.ForeignKey('Note',null=True,blank=True)
     content = models.TextField()
     created_by = models.ForeignKey(User,null=True,blank=True, related_name='notes')
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User,null=True,blank=True, related_name='+')
     modified = models.DateTimeField(auto_now=True)
     content_type = models.ForeignKey(ContentType)
@@ -40,3 +41,8 @@ class Note(models.Model):
 def file_delete(sender, instance, **kwargs):
     # Pass false so FileField doesn't save the model.
     instance.file.delete(False)
+    
+def delete_attachments(sender,instance,**kwargs):
+    ct = ContentType.objects.get_for_model(instance)
+    File.objects.filter(content_type=ct,object_id=instance.pk).delete()
+    Note.objects.filter(content_type=ct,object_id=instance.pk).delete()

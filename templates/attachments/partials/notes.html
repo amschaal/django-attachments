@@ -20,11 +20,13 @@
 				<div style="clear:both"></div>
 			</div>
 			<div ng-if="!note.editing">
-				<p><small class="details">{[note.created_by]} {[note.created|date:'short']}</small></p>
+				<p><small class="details">Created {[note.created|date:'short']} by {[note.created_by]}</small> <small ng-if="note.modified && note.modified_by" class="details pull-right">Last modified {[note.modified|date:'short']} by {[note.modified_by]}</small></p>
 				<div class="content">{[note.content]}</div>
+				<p>
 				<i style="margin-left:5px" class="glyphicon glyphicon-share-alt pull-right" ng-click="respond(note)" ng-if="note.id"></i> 
 				<i style="margin-left:5px" class="glyphicon glyphicon-pencil pull-right" ng-click="note.editing=true"></i> 
 				<i class="glyphicon glyphicon-remove pull-right" ng-click="deleteNote(note)"></i>
+				</p>
 			</div>
 		</div>
 		<ng-include src="'noteResponses.html'"></ng-include>

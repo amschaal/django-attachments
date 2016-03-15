@@ -33,7 +33,6 @@ def attach_file(request,content_type_id,pk):
     ct = ContentType.objects.get(id=content_type_id)
     klass = ct.model_class()
     obj = klass.objects.get(pk=pk)
-    next = request.REQUEST.get('next',request.META['HTTP_REFERER'])
     if request.method == 'GET':
         form = FileForm()
     elif request.method == 'POST':
