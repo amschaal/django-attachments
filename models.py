@@ -36,6 +36,20 @@ class Note(models.Model):
     def __unicode__(self):              # __unicode__ on Python 2
         return self.content[:50]+'...'
 
+class URL(models.Model):
+    url = models.URLField()
+    text = models.CharField(max_length=100,null=True)
+    description = models.TextField(null=True)
+    modified_by = models.ForeignKey(User,null=True,blank=True, related_name='+')
+    modified = models.DateTimeField(auto_now=True)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.CharField(max_length=30) #Can be coerced into integer key if necessary
+    content_object = GenericForeignKey('content_type', 'object_id')
+    admin_only = models.BooleanField(default=True)
+    def __unicode__(self):              # __unicode__ on Python 2
+        return self.url
+    def get_text(self):
+        return self.text if self.text else self.url
 
 @receiver(pre_delete, sender=File)
 def file_delete(sender, instance, **kwargs):
@@ -46,3 +60,4 @@ def delete_attachments(sender,instance,**kwargs):
     ct = ContentType.objects.get_for_model(instance)
     File.objects.filter(content_type=ct,object_id=instance.pk).delete()
     Note.objects.filter(content_type=ct,object_id=instance.pk).delete()
+    URL.objects.filter(content_type=ct,object_id=instance.pk).delete()

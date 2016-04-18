@@ -12,11 +12,12 @@ urlpatterns = patterns('',)
 #     )
 
 from rest_framework import routers
-from api import NoteViewSet, FileViewSet
+from api import NoteViewSet, FileViewSet, URLViewSet
 
 router = routers.DefaultRouter()
 router.register(r'notes', NoteViewSet,'Note')
 router.register(r'files', FileViewSet,'File')
+router.register(r'urls', URLViewSet,'URL')
 
 
 urlpatterns = patterns('',

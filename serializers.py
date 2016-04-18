@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import File, Note
+from models import File, Note, URL
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import filesizeformat
         
@@ -22,3 +22,8 @@ class NoteSerializer(serializers.ModelSerializer):
     modified_by = serializers.StringRelatedField(many=False)
     class Meta:
         model = Note
+
+class URLSerializer(serializers.ModelSerializer):
+    modified_by = serializers.StringRelatedField(many=False)
+    class Meta:
+        model = URL

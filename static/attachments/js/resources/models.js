@@ -21,6 +21,14 @@ angular.module('attachments',['ngResource'])
     remove : { method : 'DELETE' }
   });
 }])
+.factory('URL', ['$resource', function ($resource) {
+  return $resource('/attachments/api/urls/:id/', {id:'@id'}, {
+    query: { method: 'GET', transformResponse:transformDjangoRestResponse, isArray:true },
+    save : { method : 'PUT' },
+    create : { method : 'POST' },
+    remove : { method : 'DELETE' }
+  });
+}])
 .factory('File', ['$resource', function ($resource) {
   return $resource('/attachments/api/files/:id/', {id:'@id'}, {
     query: { method: 'GET', transformResponse:transformDjangoRestResponse, isArray:true },
