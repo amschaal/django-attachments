@@ -29,8 +29,8 @@ function URLController($scope,$rootScope,URL) {
 			url.$create();
 	};
 	$scope.init = function(params){
-		console.log('params',params);
-		$scope.urls = URL.query({content_type:params.content_type_id,object_id:params.pk},function(){setURLsCount()});
+		console.log('url params',params);
+		$scope.urls = URL.query({content_type:params.content_type_id,object_id:params.object_id},function(){setURLsCount()});
 	}
 	$scope.newURL = function(){
 		var url = new URL(urlDefaults);
