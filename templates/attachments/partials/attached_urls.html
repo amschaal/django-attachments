@@ -14,15 +14,15 @@ border-top: none !important;
 <tr ng-repeat="url in urls | orderBy:'-created'">
 <td ng-if="!url.editing"><a href="{[url.url]}"><span ng-if="url.text">{[url.text]}</span><span ng-if="!url.text">{[url.url]}</span></a></td>
 <td ng-if="url.editing">
-	<label>URL <input ng-model="url.url"/></label><br>
-	<label>Text<input ng-model="url.text"/></label>
+	<label ng-class="{'error':url.errors}">URL: </label> <input ng-model="url.url"/><br>
+	<label>Text: </label> <input ng-model="url.text"/>
 </td>
 <td>{[url.modified|date:'short']}</td>
 <td>{[url.modified_by]}</td>
 <td ng-if="!url.editing">{[url.description]}</td><td ng-if="url.editing"><textarea ng-model="url.description"></textarea></td>
 <td>{[file.size]}</td>
 <td>
-	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteURL(url,$index)">Delete</button>
+	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteURL($index)">Delete</button>
 	<button class="btn btn-xs pull-right" ng-if="!url.editing" ng-click="editURL(url)">Edit</button>
 	<button class="btn btn-xs btn-success pull-right" ng-if="url.editing" ng-click="save(url)">Save</button>
 </td>

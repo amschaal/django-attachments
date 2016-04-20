@@ -10,10 +10,10 @@ function FilesController($scope,$rootScope,Upload,$File) {
 	function setFilesCount(){
 		$rootScope.attachments_object.files = $scope.files.length;
 	}
-	$scope.deleteFile = function(file,index){
+	$scope.deleteFile = function(index){
 		if (!confirm("Are you sure you want to delete this file?"))
 			return;
-		file.$remove(function(){
+		$scope.files[index].$remove(function(){
 			$scope.files.splice(index,1);
 			setFilesCount();
 		});

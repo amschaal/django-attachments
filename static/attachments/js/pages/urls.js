@@ -8,13 +8,17 @@ function URLController($scope,$rootScope,URL) {
 	function setURLsCount(){
 		$rootScope.attachments_object.urls = $scope.urls.length;
 	}
-	$scope.deleteURL = function(url,index){
-		if (!confirm("Are you sure you want to delete this url?"))
-			return;
-		url.$remove(function(){
+	$scope.deleteURL = function(index){
+		if (!$scope.urls[index].id)
 			$scope.urls.splice(index,1);
-			setURLsCount();
-		});
+		else {
+			if (!confirm("Are you sure you want to delete this url?"))
+				return;
+			$scope.urls[index].$remove(function(){
+				$scope.urls.splice(index,1);
+				setURLsCount();
+			});
+		}
 	};
 	$scope.editURL = function(url){
 		url.editing = true;
@@ -24,9 +28,9 @@ function URLController($scope,$rootScope,URL) {
 	};
 	$scope.save = function(url){
 		if(url.id)
-			url.$save();
+			url.$save(function(){},function(response){url.errors = response.data;});
 		else
-			url.$create();
+			url.$create(function(){setURLsCount();},function(response){url.errors = response.data;});
 	};
 	$scope.init = function(params){
 		console.log('url params',params);
