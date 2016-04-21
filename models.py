@@ -33,6 +33,7 @@ class Note(models.Model):
     object_id = models.CharField(max_length=30) #Can be coerced into integer key if necessary
     content_object = GenericForeignKey('content_type', 'object_id')
     admin_only = models.BooleanField(default=True)
+    tags = models.CharField(max_length=50,blank=True,default='')
     def __unicode__(self):              # __unicode__ on Python 2
         return self.content[:50]+'...'
 

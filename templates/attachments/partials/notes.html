@@ -1,26 +1,26 @@
 {% load content_type %}
+{% load attachment_helpers %}
+{% attachment_settings %}
+
 <script src="/static/attachments/js/pages/notes.js"></script>
-<style>
-.pink{background-color:pink;}
-.green{background-color:green;}
-.note-wrapper{padding-left:15px;}
-.note {max-width: 800px; min-height: 50px;}
-.note textarea{width:100%;height:100%; min-height:100px;}
-.note span.note-content{min-height:30px;width:100%;}
-.note .content{white-space: pre-wrap;}
-</style>
+<link href="/static/attachments/css/attachments.css" rel="stylesheet">
 
 <script type='text/ng-template' id="noteResponses.html">
     <div class="note-wrapper" ng-repeat="note in getResponses(note)|orderBy:'created'">
-		<div class="alert note" ng-class="{'alert-info': note.admin_only, 'alert-success': !note.admin_only}">
+		<div class="alert note" ng-class="note.tags" >
 			<div ng-if="note.editing">
 				<button type="button" class="close" data-dismiss="alert" ng-click="note.editing=false"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 				<textarea ng-model="note.content" placeholder="Enter text here...">{[note.content]}</textarea>
+				<span class="pull-left"><label ng-repeat="(tag,label) in tags"><input type="checkbox" ng-checked="note.tags.indexOf(tag) != -1" ng-click="toggleTag(note,tag)"> {[label]} </label></span>
 				<button class="btn btn-success btn-sm pull-right" ng-click="save(note)">Save</button>
 				<div style="clear:both"></div>
 			</div>
 			<div ng-if="!note.editing">
-				<p><small class="details">Created {[note.created|date:'short']} by {[note.created_by]}</small> <small ng-if="note.modified && note.modified_by" class="details pull-right">Last modified {[note.modified|date:'short']} by {[note.modified_by]}</small></p>
+				<p>
+				<small class="details">Created {[note.created|date:'short']} by {[note.created_by]}</small>
+				<small ng-if="note.modified && note.modified_by" class="details"> Last modified {[note.modified|date:'short']} by {[note.modified_by]}</small> 
+				<small class="pull-right" ng-if="note.tags.length"> <i class="glyphicon glyphicon-tags"></i> <span ng-repeat="tag in note.tags"> {[getTagLabel(tag)]}{[$last ? '' : ', ']}</span></small>				
+				</p>
 				<div class="content">{[note.content]}</div>
 				<p>
 				<i style="margin-left:5px" class="glyphicon glyphicon-share-alt pull-right" ng-click="respond(note)" ng-if="note.id"></i> 
@@ -32,7 +32,7 @@
 		<ng-include src="'noteResponses.html'"></ng-include>
 	</div>
 </script> 
-<div ng-controller="NotesController" ng-init="setNoteDefaults({content_type:{{object|content_type_id}},object_id:'{{object.pk}}'});init();">
+<div ng-controller="NotesController" ng-init="tags={{note_tags_json}};setNoteDefaults({content_type:{{object|content_type_id}},object_id:'{{object.pk}}', tags:[]});init();">
 	<h4 ng-if="notes.length < 1">There are currently no notes.</h4>
 	<ng-include src="'noteResponses.html'"></ng-include>
 	<button ng-click="newNote()" class="btn btn-success">Add note</button>

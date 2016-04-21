@@ -67,6 +67,18 @@ function NotesController($scope,$rootScope,$Note) {
 		noteHash[note.parent].push(note);
 		setNotesCount();
 	};
+	$scope.toggleTag  = function (note,tag) {
+		console.log('before',note.tags,tag);
+        if (note.tags.indexOf(tag) === -1) {
+        	note.tags.push(tag);
+        } else {
+        	note.tags.splice(note.tags.indexOf(tag), 1);
+        }
+        console.log('after',note.tags,tag);
+    };
+    $scope.getTagLabel = function(tag){
+    	return $scope.tags[tag] ? $scope.tags[tag] : tag;
+    }
 	$scope.init = function(){
 		$scope.notes = $Note.query(noteDefaults,function() {
 			angular.forEach($scope.notes,function(note){

@@ -1,10 +1,6 @@
 {% load attachment_helpers %}
-<style>
-.no-border-top td, .no-border-top th{
-border-top: none !important;
-}
-</style>
 <script src="/static/attachments/js/pages/urls.js"></script>
+<link href="/static/attachments/css/attachments.css" rel="stylesheet">
 
 <div ng-controller="URLController" ng-init="setURLDefaults({content_type:{{object|content_type_id}},object_id:'{{object.pk}}'});init({content_type_id:{{object|content_type_id}},object_id:'{{object.pk}}'});">
 
