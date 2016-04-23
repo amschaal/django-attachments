@@ -12,12 +12,12 @@
 .note textarea{width:100%;height:100%; min-height:100px;}
 .note span.note-content{min-height:30px;width:100%;}
 .note .content{white-space: pre-wrap;}
-.note.issue{
+.issue .note{
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
 }
-.note.closed{
+.issue.closed .note{
 	color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;

@@ -6,8 +6,8 @@
 <link href="/static/attachments/css/attachments.css" rel="stylesheet">
 
 <script type='text/ng-template' id="noteResponses.html">
-    <div class="note-wrapper" ng-repeat="note in getResponses(note)|orderBy:'created'">
-		<div class="alert note" ng-class="note.tags" >
+    <div class="note-wrapper" ng-class="note.tags" ng-repeat="note in getResponses(note)|orderBy:'created'">
+		<div class="alert note" >
 			<div ng-if="note.editing">
 				<button type="button" class="close" data-dismiss="alert" ng-click="note.editing=false"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 				<textarea ng-model="note.content" placeholder="Enter text here...">{[note.content]}</textarea>
