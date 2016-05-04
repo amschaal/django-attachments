@@ -7,8 +7,8 @@ angular.module("attachment-files")
 		restrict: 'AE',
 		templateUrl: 'template/attachments/files.html',
 		scope: {
-			objectId:'@',
-			contentType:'@'
+			objectId:'=',
+			contentType:'='
 		},
 		controller: function ($scope,$rootScope,Upload) {
 			$scope.files = [];

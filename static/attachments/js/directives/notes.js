@@ -7,8 +7,8 @@ angular.module("attachment-notes")
 		restrict: 'AE',
 		templateUrl: 'template/attachments/notes.html',
 		scope: {
-			objectId:'@',
-			contentType:'@',
+			objectId:'=',
+			contentType:'=',
 			tags:'@'
 		},
 		controller: function ($scope,$rootScope) {

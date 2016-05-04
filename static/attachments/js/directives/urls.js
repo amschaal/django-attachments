@@ -7,8 +7,8 @@ angular.module("attachment-urls")
 		restrict: 'AE',
 		templateUrl: 'template/attachments/urls.html',
 		scope: {
-			objectId:'@',
-			contentType:'@'
+			objectId:'=',
+			contentType:'='
 		},
 		controller: function ($scope,$rootScope) {
 			$scope.urls = [];
