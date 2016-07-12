@@ -4,13 +4,15 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
+from attachments import UPLOAD_TO, FILE_SYSTEM_STORAGE
 
 #
 # Attach a file to just about anything:
 # file = File(text='My wonderful note',created_by=request.user,content_object=some_model_instance)
 # file.save()
+
 class File(models.Model):
-    file = models.FileField(upload_to='files')
+    file = models.FileField(upload_to=UPLOAD_TO,storage=FILE_SYSTEM_STORAGE)
     name = models.CharField(max_length=100)
     description = models.TextField(null=True,blank=True)
     uploaded = models.DateTimeField(auto_now_add=True)
@@ -51,6 +53,9 @@ class URL(models.Model):
         return self.url
     def get_text(self):
         return self.text if self.text else self.url
+
+
+
 
 @receiver(pre_delete, sender=File)
 def file_delete(sender, instance, **kwargs):
