@@ -58,8 +58,9 @@ angular.module("attachment-files")
 
 angular.module("attachment-files").run(['$templateCache', function($templateCache) {
 	$templateCache.put('template/attachments/files.html',
-	'<div ngf-drop="uploadFiles($files)" class="drop-box" ng-model="file_uploads"\
-			  ngf-drag-over-class="\'dragover\'" ngf-multiple="true">Drop files here</div>\
+	'<div class="button btn btn-default" ngf-select="uploadFiles($files)" multiple="multiple" ng-model="file_uploads">Select files</div>\
+			<div ngf-drop="uploadFiles($files)" class="drop-box" ng-model="file_uploads"\
+			  ngf-drag-over-class="\'dragover\'" ngf-multiple="true">Or drop files here</div>\
 		  <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>\
 		  <h4 ng-if="!files.length">There are currently no files.</h4>\
 		  <table class="table" ng-if="files.length">\
