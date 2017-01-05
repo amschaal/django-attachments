@@ -69,7 +69,7 @@ angular.module("attachment-files").run(['$templateCache', function($templateCach
 			  <td><a href="{[file.file]}">{[file.name]}</a></td>\
 			  <td>{[file.uploaded|date:"short"]}</td>\
 			  <td>{[file.uploaded_by]}</td>\
-			  <td ng-if="!file.editing">{[file.description]}</td><td ng-if="file.editing"><textarea ng-model="file.description"></textarea></td>\
+			  <td ng-if="!file.editing">{[file.description]}</td><td ng-if="file.editing"><textarea ng-model="file.description" class="form-control"></textarea></td>\
 			  <td>{[file.size]}</td>\
 			  <td>\
 			  	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteFile($index)">Delete</button>\

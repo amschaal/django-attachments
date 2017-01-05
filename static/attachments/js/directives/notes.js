@@ -110,7 +110,7 @@ angular.module("attachment-notes").run(['$templateCache', function($templateCach
 	<div class="alert note" >\
 	<div ng-if="note.editing">\
 		<button type="button" class="close" data-dismiss="alert" ng-click="note.editing=false"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>\
-		<textarea ng-model="note.content" placeholder="Enter text here...">{[note.content]}</textarea>\
+		<textarea ng-model="note.content" placeholder="Enter text here..." class="form-control">{[note.content]}</textarea>\
 		<span class="pull-left"><label ng-repeat="(tag,label) in tags"><input type="checkbox" ng-checked="note.tags.indexOf(tag) != -1" ng-click="toggleTag(note,tag)"> {[label]} </label></span>\
 		<button class="btn btn-success btn-sm pull-right" ng-click="save(note)">Save</button>\
 		<div style="clear:both"></div>\
