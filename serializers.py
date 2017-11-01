@@ -17,6 +17,7 @@ class FileSerializer(serializers.ModelSerializer):
     size = serializers.SerializerMethodField(read_only=True)
     class Meta:
 #         fields = ('id','created_by','modified_by','')
+        fields = '__all__'
         model = File
     def get_file(self,obj):
         if obj.id:
@@ -31,8 +32,10 @@ class NoteSerializer(serializers.ModelSerializer):
     tags = CommaSeperatedField()
     class Meta:
         model = Note
+        fields = '__all__'
 
 class URLSerializer(serializers.ModelSerializer):
     modified_by = serializers.StringRelatedField(many=False)
     class Meta:
         model = URL
+        fields = '__all__'

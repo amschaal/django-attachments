@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
+import views
 admin.autodiscover()
 
-urlpatterns = patterns('',)
 # if USE_CAS:
 #     admin.site.login = login_required(admin.site.login)
 #     urlpatterns += patterns('',
@@ -20,13 +20,13 @@ router.register(r'files', FileViewSet,'File')
 router.register(r'urls', URLViewSet,'URL')
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
 #     url(r'^$', 'glims.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^file/(?P<pk>\d+)/get/$', 'attachments.views.get_file', name='get_file'),
-    url(r'^files/(?P<content_type_id>\d+)/(?P<pk>[\-\w]+)/attach/$', 'attachments.views.attach_file', name='attach_file'),
+    url(r'^file/(?P<pk>\d+)/get/$', views.get_file, name='get_file'),
+    url(r'^files/(?P<content_type_id>\d+)/(?P<pk>[\-\w]+)/attach/$', views.attach_file, name='attach_file'),
     url(r'^api/', include(router.urls)),
-)
+]
 
