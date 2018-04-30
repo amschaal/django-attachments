@@ -46,7 +46,7 @@ angular.module("attachment-urls")
 				$scope.urls.push(url);
 			};
 			setURLDefaults({content_type:$scope.contentType,object_id:$scope.objectId})
-			$scope.urls = URL.query({content_type:$scope.contentType,object_id:$scope.objectId,page_size=-1},function(){setURLsCount()});
+			$scope.urls = URL.query({content_type:$scope.contentType,object_id:$scope.objectId,page_size:-1},function(){setURLsCount()});
 		}
 	}
 });
