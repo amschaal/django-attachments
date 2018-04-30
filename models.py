@@ -13,7 +13,7 @@ from attachments import UPLOAD_TO, FILE_SYSTEM_STORAGE
 
 class File(models.Model):
     file = models.FileField(upload_to=UPLOAD_TO,storage=FILE_SYSTEM_STORAGE)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=250)
     description = models.TextField(null=True,blank=True)
     uploaded = models.DateTimeField(auto_now_add=True)
     uploaded_by = models.ForeignKey(User,null=True,blank=True)
@@ -41,7 +41,7 @@ class Note(models.Model):
 
 class URL(models.Model):
     url = models.URLField()
-    text = models.CharField(max_length=100,null=True)
+    text = models.CharField(max_length=250,null=True)
     description = models.TextField(null=True)
     modified_by = models.ForeignKey(User,null=True,blank=True, related_name='+')
     modified = models.DateTimeField(auto_now=True)
