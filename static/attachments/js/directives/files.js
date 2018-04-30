@@ -32,7 +32,7 @@ angular.module("attachment-files")
 			};
 			function init(){
 				upload_url = $rootScope.getURL('attach_file',{content_type_id:$scope.contentType,pk:$scope.objectId});
-				$scope.files = File.query({content_type:$scope.contentType,object_id:$scope.objectId,page_size:-1},function(){setFilesCount()});
+				$scope.files = File.query({content_type:$scope.contentType,object_id:$scope.objectId,page_size:1000},function(){setFilesCount()});
 			}
 			$scope.uploadFiles = function (files) {
 			      if (files && files.length) {

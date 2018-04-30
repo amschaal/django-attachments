@@ -94,7 +94,7 @@ angular.module("attachment-notes")
 		        }; 
 		    setNoteDefaults({content_type:$scope.contentType,object_id:$scope.objectId, tags:[]})
 		    var query = angular.copy(noteDefaults);
-		    query.page_size = -1;
+		    query.page_size = 1000;
 			$scope.notes = Note.query(query,function() {
 				angular.forEach($scope.notes,function(note){
 					$scope.addNote(note);
