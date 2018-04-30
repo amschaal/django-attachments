@@ -12,8 +12,8 @@ from attachments import UPLOAD_TO, FILE_SYSTEM_STORAGE
 # file.save()
 
 class File(models.Model):
-    file = models.FileField(upload_to=UPLOAD_TO,storage=FILE_SYSTEM_STORAGE)
-    name = models.CharField(max_length=250)
+    file = models.FileField(upload_to=UPLOAD_TO,storage=FILE_SYSTEM_STORAGE,max_length=250)
+    name = models.CharField(max_length=100)
     description = models.TextField(null=True,blank=True)
     uploaded = models.DateTimeField(auto_now_add=True)
     uploaded_by = models.ForeignKey(User,null=True,blank=True)
