@@ -16,11 +16,11 @@ angular.module("attachment-files")
 			function setFilesCount(){
 				$rootScope.attachments_object.files = $scope.files.length;
 			}
-			$scope.deleteFile = function(index){
+			$scope.deleteFile = function(file){
 				if (!confirm("Are you sure you want to delete this file?"))
 					return;
-				$scope.files[index].$remove(function(){
-					$scope.files.splice(index,1);
+				file.$remove(function(){
+					$scope.files.splice($scope.files.indexOf(file),1);
 					setFilesCount();
 				});
 			};
@@ -72,7 +72,7 @@ angular.module("attachment-files").run(['$templateCache', function($templateCach
 			  <td ng-if="!file.editing">{[file.description]}</td><td ng-if="file.editing"><textarea ng-model="file.description" class="form-control"></textarea></td>\
 			  <td>{[file.size]}</td>\
 			  <td>\
-			  	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteFile($index)">Delete</button>\
+			  	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteFile(file)">Delete</button>\
 			  	<button class="btn btn-xs pull-right" ng-if="!file.editing" ng-click="editFile(file)">Edit</button>\
 			  	<button class="btn btn-xs btn-success pull-right" ng-if="file.editing" ng-click="saveFile(file)">Save</button>\
 			  </td>\

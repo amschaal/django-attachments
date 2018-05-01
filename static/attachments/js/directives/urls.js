@@ -16,14 +16,14 @@ angular.module("attachment-urls")
 			function setURLsCount(){
 				$rootScope.attachments_object.urls = $scope.urls.length;
 			}
-			$scope.deleteURL = function(index){
-				if (!$scope.urls[index].id)
-					$scope.urls.splice(index,1);
+			$scope.deleteURL = function(url){
+				if (!url.id)
+					$scope.urls.splice($scope.urls.indexOf(url),1);
 				else {
 					if (!confirm("Are you sure you want to delete this url?"))
 						return;
-					$scope.urls[index].$remove(function(){
-						$scope.urls.splice(index,1);
+					url.$remove(function(){
+						$scope.urls.splice($scope.urls.indexOf(url),1);
 						setURLsCount();
 					});
 				}
@@ -67,7 +67,7 @@ angular.module("attachment-urls").run(['$templateCache', function($templateCache
 	<td ng-if="!url.editing">{[url.description]}</td><td ng-if="url.editing"><textarea ng-model="url.description"></textarea></td>\
 	<td>{[file.size]}</td>\
 	<td>\
-		<button class="btn btn-xs btn-danger pull-right" ng-click="deleteURL($index)">Delete</button>\
+		<button class="btn btn-xs btn-danger pull-right" ng-click="deleteURL(url)">Delete</button>\
 		<button class="btn btn-xs pull-right" ng-if="!url.editing" ng-click="editURL(url)">Edit</button>\
 		<button class="btn btn-xs btn-success pull-right" ng-if="url.editing" ng-click="save(url)">Save</button>\
 	</td>\
