@@ -18,7 +18,7 @@
 <td ng-if="!url.editing">{[url.description]}</td><td ng-if="url.editing"><textarea ng-model="url.description"></textarea></td>
 <td>{[file.size]}</td>
 <td>
-	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteURL($index)">Delete</button>
+	<button class="btn btn-xs btn-danger pull-right" ng-click="deleteURL(url)">Delete</button>
 	<button class="btn btn-xs pull-right" ng-if="!url.editing" ng-click="editURL(url)">Edit</button>
 	<button class="btn btn-xs btn-success pull-right" ng-if="url.editing" ng-click="save(url)">Save</button>
 </td>

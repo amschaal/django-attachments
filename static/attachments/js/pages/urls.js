@@ -8,14 +8,14 @@ function URLController($scope,$rootScope,URL) {
 	function setURLsCount(){
 		$rootScope.attachments_object.urls = $scope.urls.length;
 	}
-	$scope.deleteURL = function(index){
-		if (!$scope.urls[index].id)
-			$scope.urls.splice(index,1);
+	$scope.deleteURL = function(url){
+		if (!url.id)
+			$scope.urls.splice($scope.urls.indexOf(url),1);
 		else {
 			if (!confirm("Are you sure you want to delete this url?"))
 				return;
-			$scope.urls[index].$remove(function(){
-				$scope.urls.splice(index,1);
+			url.$remove(function(){
+				$scope.urls.splice($scope.urls.indexOf(url),1);
 				setURLsCount();
 			});
 		}
