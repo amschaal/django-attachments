@@ -15,7 +15,7 @@ class FileViewSet(viewsets.ModelViewSet):
 class NoteViewSet(viewsets.ModelViewSet):
     serializer_class = NoteSerializer
 #     permission_classes = [CustomPermission]
-    filter_fields = ('content_type', 'object_id')
+    filter_fields = {'content_type':['exact'],'content':['icontains'], 'object_id':['exact']}
     model = Note
     queryset = Note.objects.all()
 #     def get_queryset(self):
