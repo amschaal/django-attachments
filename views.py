@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 
 def get_file(request,pk):
     file = File.objects.get(id=pk)
-    return sendfile(request, file.file.path)
+    return sendfile(request, file.file.path, attachment=True)
 
 @api_view(['POST'])
 def attach_file(request,content_type_id,pk):
